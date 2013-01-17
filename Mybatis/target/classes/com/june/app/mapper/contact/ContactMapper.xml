@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.june.app.mapper.contact.ContactMapper">
+
+	<cache />
+	<select id="selectOne" parameterType="Contact"
+		resultType="Contact">
+		SELECT userid, email, name
+		FROM contact
+		WHERE userid = #{userid}
+	</select>
+	
+	<select id="selectAll" parameterType="Contact" resultType="Contact">
+		SELECT CONTACT_ID, CONTACT_EMAIL, CONTACT_NAME, CONTACT_PHONE
+		FROM contact
+	</select>
+
+	<select id="selectPage" parameterType="Contact" resultType="Contact">
+		SELECT CONTACT_ID, CONTACT_EMAIL, CONTACT_NAME, CONTACT_PHONE
+		FROM contact
+		WHERE CONTACT_ID BETWEEN #{start} and #{limit}
+	</select>
+	
+	<insert id="insert" parameterType="Account">
+		INSERT INTO account
+		(userid, email, name)
+		VALUES
+		(#{userid}, #{email}, #{name})
+	</insert>
+
+	<update id="update" parameterType="Account">
+		UPDATE account SET
+		email = #{email},
+		name = #{name}
+		WHERE userid = #{userid}
+	</update>
+
+	<delete id="delete" parameterType="Account">
+		DELETE FROM account WHERE userid = #{userid}
+	</delete>
+
+</mapper>
